@@ -1,1 +1,1 @@
-# EVAL-SHOP-LUC_FERY
+# Evaluation dans le cadre du cours de Framework Client
