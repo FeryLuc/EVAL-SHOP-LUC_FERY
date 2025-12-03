@@ -44,9 +44,14 @@ export default class DB {
     return response.json();
   }
   static async deleteCartItemById(id) {
-    const response = await fetch(this.apiUrl + 'cartItems/' + id, {
-      method: 'DELETE',
-    });
+    console.log(id);
+
+    const response = await fetch(
+      this.apiUrl + 'products/' + id + '/' + 'cartItems/' + id,
+      {
+        method: 'DELETE',
+      }
+    );
     return response.json();
   }
 }

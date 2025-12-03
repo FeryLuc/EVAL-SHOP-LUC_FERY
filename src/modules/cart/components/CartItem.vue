@@ -26,7 +26,10 @@ const imgSrc = `https://picsum.photos/300/200/?random=${props.cartItem.productId
           cartStore.updateQuantity(props.cartItem.id, $event.target.value)
         "
       />
-      <button class="ml-2 text-red-500 hover:text-red-700">
+      <button
+        class="ml-2 text-red-500 hover:text-red-700"
+        @click="cartStore.deleteCartItem(props.cartItem.id)"
+      >
         <i class="fas fa-times"></i>
       </button>
     </div>

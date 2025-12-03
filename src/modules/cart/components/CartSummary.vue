@@ -11,12 +11,13 @@ import MyButton from '@/components/ui/MyButton.vue';
       </div>
       <div class="flex justify-between mb-1">
         <span><strong>Taxe (20%):</strong></span>
-        <span>€10.00</span>
+        <span>€{{ cartStore.tva }}</span>
       </div>
       <div class="flex justify-between items-center my-8">
         <span><strong>Livraison:</strong></span>
         <select
           class="form-select py-1 px-2 block w-full rounded border border-gray-300 ml-2"
+          v-model="cartStore.deliveryCost"
         >
           <option value="5">Standard - €5</option>
           <option value="15">Express - €15</option>
@@ -24,7 +25,7 @@ import MyButton from '@/components/ui/MyButton.vue';
       </div>
       <div class="flex justify-between font-bold mb-1 text-xl">
         <span><strong>Total Général:</strong></span>
-        <span>€65.00</span>
+        <span>€{{ cartStore.total }}</span>
       </div>
       <my-button>Procéder au paiement</my-button>
     </div>
