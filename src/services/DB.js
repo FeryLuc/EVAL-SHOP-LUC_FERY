@@ -11,7 +11,7 @@ export default class DB {
     const response = await fetch(this.apiUrl + 'cartItems');
     return response.json();
   }
-  static async getCartItemsWithProducts(products, cartItems) {
+  static getCartItemsWithProducts(products, cartItems) {
     const result = cartItems.map((item) => {
       const product = products.find((p) => p.id === item.productId);
       return {

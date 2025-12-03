@@ -5,8 +5,8 @@ import ShoppingCart from './modules/cart/ShoppingCart.vue';
 import AppFooter from './layout/AppFooter.vue';
 import { cartStore } from './stores/cart';
 import { onMounted } from 'vue';
-onMounted(() => {
-  cartStore.init('https://692dc397e5f67cd80a4ce4ef.mockapi.io/');
+onMounted(async () => {
+  await cartStore.init('https://692dc397e5f67cd80a4ce4ef.mockapi.io/');
 });
 </script>
 
