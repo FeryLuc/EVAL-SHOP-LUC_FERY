@@ -33,7 +33,16 @@ export default class DB {
     });
     return response.json();
   }
-
+  static async updateCartItem(id, quantity) {
+    const response = await fetch(this.apiUrl + 'cartItems/' + id, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        quantity: quantity,
+      }),
+    });
+    return response.json();
+  }
   static async deleteCartItemById(id) {
     const response = await fetch(this.apiUrl + 'cartItems/' + id, {
       method: 'DELETE',

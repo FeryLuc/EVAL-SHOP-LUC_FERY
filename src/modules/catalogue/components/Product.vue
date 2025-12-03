@@ -1,5 +1,6 @@
 <script setup>
 import MyButton from '@/components/ui/MyButton.vue';
+import { cartStore } from '@/stores/cart';
 const props = defineProps({ product: { type: Object } });
 const imgSrc = `https://picsum.photos/300/200/?random=${props.product.id}`;
 </script>
@@ -11,7 +12,9 @@ const imgSrc = `https://picsum.photos/300/200/?random=${props.product.id}`;
       <p class="text-gray-700">
         €<span>{{ props.product.price }}</span>
       </p>
-      <my-button>Ajouter</my-button>
+      <my-button @click="cartStore.createCartItem(props.product.id)"
+        >Ajouter</my-button
+      >
     </div>
   </article>
 </template>
