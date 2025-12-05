@@ -27,7 +27,7 @@ import MyButton from '@/components/ui/MyButton.vue';
         <span><strong>Total Général:</strong></span>
         <span>€{{ cartStore.total }}</span>
       </div>
-      <my-button>Procéder au paiement</my-button>
+      <my-button @click="cartStore.order()">Procéder au paiement</my-button>
     </div>
   </div>
 </template>

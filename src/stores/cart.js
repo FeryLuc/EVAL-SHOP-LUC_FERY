@@ -1,4 +1,5 @@
 import { ref, reactive, computed } from 'vue';
+import { productStore } from '@/stores/product';
 import DB from '@/services/DB';
 //Tableau nécessaireque pour faire la jointure des 2 tables car pas de join avec mockApi
 const cartItems = reactive([]);
@@ -6,7 +7,7 @@ const products = reactive([]);
 const deliveryCost = ref(5);
 
 const cartItemsWithProducts = computed(() =>
-  DB.getCartItemsWithProducts(products, cartItems)
+  DB.getCartItemsWithProducts(productStore.products, cartItems)
 );
 const subTotal = computed(() => {
   return cartItemsWithProducts.value
@@ -21,17 +22,12 @@ const total = computed(() =>
   (
     Number(subTotal.value) +
     Number(tva.value) +
-    Number(deliveryCost.value)
+    (cartItems.length == 0 ? 0 : Number(deliveryCost.value))
   ).toFixed(2)
 );
 
-const init = async (apiUrl) => {
-  DB.setApiUrl(apiUrl);
-  await loadProducts();
+const init = async () => {
   await loadCartItems();
-};
-const loadProducts = async () => {
-  products.splice(products.length, 0, ...(await DB.findAllProducts()));
 };
 //Sert que pour la jointure en JS. Car dans la list de la cart j'affiche les infos du produit lié a un cartItem
 const loadCartItems = async () => {
@@ -74,13 +70,15 @@ const deleteCartItem = async (cartItemId) => {
     cartItems.splice(index, 1);
   }
 };
-
+const order = () => {
+  cartItems.length = 0;
+  alert('Achat effectué ! ');
+};
 export const cartStore = reactive({
   init,
   products,
   //   cartItems,
   cartItemsWithProducts,
-  quantity: 0,
   subTotal,
   tva,
   total,
@@ -90,4 +88,5 @@ export const cartStore = reactive({
   createCartItem,
   deleteCartItem,
   updateQuantity,
+  order,
 });
