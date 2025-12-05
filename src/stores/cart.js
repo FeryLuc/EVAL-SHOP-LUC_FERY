@@ -1,6 +1,7 @@
 import { ref, reactive, computed } from 'vue';
 import { productStore } from '@/stores/product';
 import DB from '@/services/DB';
+//Attention lors des exécutions des méthodes "CRUD" je dois changer ce que je leur passe. par exemple le create ici a besoin de l'id du product pour faire une liaison.
 //Tableau nécessaireque pour faire la jointure des 2 tables car pas de join avec mockApi
 const cartItems = reactive([]);
 const products = reactive([]);
@@ -31,18 +32,8 @@ const init = async () => {
 };
 //Sert que pour la jointure en JS. Car dans la list de la cart j'affiche les infos du produit lié a un cartItem
 const loadCartItems = async () => {
-  cartItems.splice(cartItems.length, 0, ...(await DB.findAllCartItems()));
+  cartItems.splice(0, cartItems.length, ...(await DB.findAllCartItems()));
   console.table(cartItems);
-};
-
-const updateQuantity = async (id, newQuantity) => {
-  const item = cartItems.find((item) => item.id === id);
-  const quantity = parseInt(newQuantity);
-  if (item) {
-    item.quantity = quantity;
-    await DB.updateCartItem(item.id, quantity);
-    console.table(cartItems);
-  }
 };
 
 const createCartItem = async (productid) => {
@@ -63,6 +54,15 @@ const createCartItem = async (productid) => {
     console.log(cartItemsWithProducts, 'ELSEEEEEEEE');
   }
 };
+const updateQuantity = async (id, newQuantity) => {
+  const item = cartItems.find((item) => item.id === id);
+  const quantity = parseInt(newQuantity);
+  if (item) {
+    item.quantity = quantity;
+    await DB.updateCartItem(item.id, quantity);
+    console.table(cartItems);
+  }
+};
 const deleteCartItem = async (cartItemId) => {
   const res = await DB.deleteCartItemById(cartItemId);
   const index = cartItems.findIndex((item) => item.id === cartItemId);
@@ -71,9 +71,14 @@ const deleteCartItem = async (cartItemId) => {
   }
 };
 const order = () => {
-  cartItems.length = 0;
-  alert('Achat effectué ! ');
+  if (cartItems.length == 0) {
+    alert("Tu n'as rien à acheter !");
+  } else {
+    cartItems.length = 0;
+    alert('Achat effectué ! ');
+  }
 };
+
 export const cartStore = reactive({
   init,
   products,
@@ -83,8 +88,6 @@ export const cartStore = reactive({
   tva,
   total,
   deliveryCost,
-  //   loadProducts,
-  //   loadCartItems,
   createCartItem,
   deleteCartItem,
   updateQuantity,

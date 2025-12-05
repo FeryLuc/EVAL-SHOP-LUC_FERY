@@ -8,7 +8,7 @@ const init = async (apiUrl) => {
   await loadProducts();
 };
 const loadProducts = async () => {
-  products.splice(products.length, 0, ...(await DB.findAllProducts()));
+  products.splice(0, products.length, ...(await DB.findAllProducts()));
 };
 
 export const productStore = reactive({
