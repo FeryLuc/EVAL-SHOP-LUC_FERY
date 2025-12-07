@@ -1,5 +1,5 @@
 <script setup>
-import { cartStore } from '@/stores/cartLS';
+import { cartStore } from '@/stores/shoppingCart';
 import MyButton from '@/components/ui/MyButton.vue';
 </script>
 <template>

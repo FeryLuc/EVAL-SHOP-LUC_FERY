@@ -1,6 +1,6 @@
 <script setup>
 import MyButton from '@/components/ui/MyButton.vue';
-import { cartStore } from '@/stores/cartLS';
+import { cartStore } from '@/stores/shoppingCart';
 const props = defineProps({ product: { type: Object } });
 const imgSrc = `https://picsum.photos/300/200/?random=${props.product.id}`;
 </script>

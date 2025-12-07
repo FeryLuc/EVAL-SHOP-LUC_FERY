@@ -1,6 +1,6 @@
 import { ref, reactive, computed, watch } from 'vue';
 import DB from '@/services/DB';
-//Attention lors des exécutions des méthodes "CRUD" je dois changer ce que je leur passe. par exemple le create ici a besoin du product complet pour copier.
+
 const cartItems = reactive([]);
 const deliveryCost = ref(5);
 

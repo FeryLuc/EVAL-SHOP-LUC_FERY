@@ -1,10 +1,10 @@
 <script setup>
-import { cartStore } from '@/stores/cartLS';
+import { cartStore } from '@/stores/shoppingCart';
 const props = defineProps({
   cartItem: { type: Object },
 });
 const imgSrc = `https://picsum.photos/300/200/?random=${props.cartItem.id}`;
-// Attention avec le store Cart on doit utiliser les proprété productName, productprice et productId
+// Attention avec le store Cart on doit utiliser les proprété productName, productPrice et productId
 </script>
 <template>
   <li class="flex justify-between items-center py-3">

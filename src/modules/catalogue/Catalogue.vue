@@ -1,6 +1,6 @@
 <script setup>
 import Product from './components/Product.vue';
-import { productStore } from '@/stores/product';
+import { productStore } from '@/stores/products';
 </script>
 <template>
   <section class="w-full md:w-2/3 px-4 mb-8">
