@@ -1,12 +1,22 @@
 export default class DB {
+  //----DB: MockApi pour les produits----//
+  //Setup de l'url de l'API
   static setApiUrl(url) {
     this.apiUrl = url;
   }
-
+  //Fetch GET de tous les produits
   static async findAllProducts() {
     const response = await fetch(this.apiUrl + 'products');
     return response.json();
   }
+
+  //----"DB": LocalStorage pour les cartItem----//
+  //Upload du localStorage.
+  static updateLocalStorage(cartItems) {
+    localStorage.setItem('items', JSON.stringify(cartItems));
+  }
+
+  //----DB: MockApi pour les cartItem----//
   // static async findAllCartItems() {
   //   const response = await fetch(this.apiUrl + 'cartItems');
   //   return response.json();
@@ -48,7 +58,11 @@ export default class DB {
   // }
 
   // static async deleteCartItemById(id) {
-  //   console.log(id);
+  //   // console.log(id);
+  //   // console.log(
+  //   //   'DELETE URL = ',
+  //   //   this.apiUrl + 'products/' + id + '/cartItems/' + id
+  //   // );
 
   //   const response = await fetch(
   //     this.apiUrl + 'products/' + id + '/' + 'cartItems/' + id,
@@ -58,7 +72,4 @@ export default class DB {
   //   );
   //   return response.json();
   // }
-  static updateLocalStorage(cartItems) {
-    localStorage.setItem('items', JSON.stringify(cartItems));
-  }
 }

@@ -9,6 +9,7 @@ const init = async (apiUrl) => {
 };
 const loadProducts = async () => {
   products.splice(0, products.length, ...(await DB.findAllProducts()));
+  console.table(products);
 };
 
 export const productStore = reactive({

@@ -24,6 +24,7 @@ const init = async () => {
     cartItems.length,
     ...(JSON.parse(localStorage.getItem('items')) || [])
   );
+  console.table(cartItems);
 };
 const createCartItem = async (product) => {
   const existingItem = cartItems.find((item) => item.id === product.id);

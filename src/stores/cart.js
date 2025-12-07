@@ -2,7 +2,7 @@ import { ref, reactive, computed } from 'vue';
 import { productStore } from '@/stores/product';
 import DB from '@/services/DB';
 //Attention lors des exécutions des méthodes "CRUD" je dois changer ce que je leur passe. par exemple le create ici a besoin de l'id du product pour faire une liaison.
-//Tableau nécessaireque pour faire la jointure des 2 tables car pas de join avec mockApi
+//Tableau nécessaire que pour faire la jointure des 2 tables car pas de join avec mockApi
 const cartItems = reactive([]);
 const products = reactive([]);
 const deliveryCost = ref(5);
@@ -63,20 +63,29 @@ const updateQuantity = async (id, newQuantity) => {
     console.table(cartItems);
   }
 };
-const deleteCartItem = async (cartItemId) => {
-  const res = await DB.deleteCartItemById(cartItemId);
-  const index = cartItems.findIndex((item) => item.id === cartItemId);
-  if (index !== -1) {
-    cartItems.splice(index, 1);
+const deleteCartItem = async (cartItemId, selfDelete = true) => {
+  await DB.deleteCartItemById(cartItemId);
+  if (selfDelete) {
+    const index = cartItems.findIndex((item) => item.id === cartItemId);
+    if (index !== -1) {
+      cartItems.splice(index, 1);
+    }
   }
 };
-const order = () => {
+const order = async () => {
+  console.table(cartItems);
+
   if (cartItems.length == 0) {
     alert("Tu n'as rien à acheter !");
-  } else {
-    cartItems.length = 0;
-    alert('Achat effectué ! ');
+    return;
   }
+  //fonctionne pas car on modifie pendant l'itération du coup ma méthode delete à 2 chemins.
+  // cartItems.map(async (cI) => {
+  //   await deleteCartItem(cI.id);
+  // });
+  await Promise.all(cartItems.map((cI) => DB.deleteCartItemById(cI.id, false)));
+  cartItems.length = 0;
+  alert('Achat effectué ! ');
 };
 
 export const cartStore = reactive({
