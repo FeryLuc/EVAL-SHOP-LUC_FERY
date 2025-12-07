@@ -1,6 +1,7 @@
 import { ref, reactive, computed } from 'vue';
 import { productStore } from '@/stores/products';
 import DB from '@/services/DB';
+//---------STORE POUR VERSION FULL MOCKAPI TABLES RELATIONNELLES------------
 //Attention lors des exécutions des méthodes "CRUD" je dois changer ce que je leur passe. par exemple le create ici a besoin de l'id du product pour faire une liaison.
 //Tableau nécessaire que pour faire la jointure des 2 tables car pas de join avec mockApi
 const cartItems = reactive([]);

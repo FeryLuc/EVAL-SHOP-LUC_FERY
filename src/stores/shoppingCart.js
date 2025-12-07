@@ -4,11 +4,11 @@ import DB from '@/services/DB';
 const cartItems = reactive([]);
 const deliveryCost = ref(5);
 
-const subTotal = computed(() => {
-  return cartItems
+const subTotal = computed(() =>
+  cartItems
     .reduce((sum, item) => sum + Number(item.quantity) * Number(item.price), 0)
-    .toFixed(2);
-});
+    .toFixed(2)
+);
 const tva = computed(() => (subTotal.value * 0.2).toFixed(2));
 const total = computed(() =>
   (
