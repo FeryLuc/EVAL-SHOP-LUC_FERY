@@ -1,9 +1,9 @@
 <script setup>
-import { cartStore } from '@/stores/shoppingCart';
+import { cartStore } from '@/stores/cart';
 const props = defineProps({
   cartItem: { type: Object },
 });
-const imgSrc = `https://picsum.photos/300/200/?random=${props.cartItem.id}`;
+const imgSrc = `https://picsum.photos/300/200/?random=${props.cartItem.productId}`;
 // Attention avec le store Cart on doit utiliser les proprété productName, productPrice et productId
 </script>
 <template>
@@ -11,9 +11,9 @@ const imgSrc = `https://picsum.photos/300/200/?random=${props.cartItem.id}`;
     <div class="flex items-center">
       <img :src="imgSrc" alt="Product" class="h-12 w-12 rounded-full mr-4" />
       <div>
-        <span class="font-semibold">{{ props.cartItem.name }}</span>
+        <span class="font-semibold">{{ props.cartItem.productName }}</span>
         <span class="block text-sm text-gray-500"
-          >€<span>{{ props.cartItem.price }}</span></span
+          >€<span>{{ props.cartItem.productPrice }}</span></span
         >
       </div>
     </div>

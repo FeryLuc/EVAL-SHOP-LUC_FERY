@@ -5,7 +5,6 @@ import DB from '@/services/DB';
 //Attention lors des exécutions des méthodes "CRUD" je dois changer ce que je leur passe. par exemple le create ici a besoin de l'id du product pour faire une liaison.
 //Tableau nécessaire que pour faire la jointure des 2 tables car pas de join avec mockApi
 const cartItems = reactive([]);
-const products = reactive([]);
 const deliveryCost = ref(5);
 
 const cartItemsWithProducts = computed(() =>
@@ -61,7 +60,6 @@ const updateQuantity = async (id, newQuantity) => {
   if (item) {
     item.quantity = quantity;
     await DB.updateCartItem(item.id, quantity);
-    console.table(cartItems);
   }
 };
 const deleteCartItem = async (cartItemId, selfDelete = true) => {
@@ -91,8 +89,6 @@ const order = async () => {
 
 export const cartStore = reactive({
   init,
-  products,
-  //   cartItems,
   cartItemsWithProducts,
   subTotal,
   tva,

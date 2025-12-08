@@ -3,7 +3,7 @@ import AppHeader from './layout/AppHeader.vue';
 import Catalogue from './modules/catalogue/Catalogue.vue';
 import ShoppingCart from './modules/cart/ShoppingCart.vue';
 import AppFooter from './layout/AppFooter.vue';
-import { cartStore } from './stores/shoppingCart';
+import { cartStore } from './stores/cart';
 import { productStore } from './stores/products';
 import { onMounted } from 'vue';
 onMounted(async () => {
